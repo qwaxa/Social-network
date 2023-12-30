@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social-network</title>
+    <link rel="stylesheet" href="/css/messages.css">
+</head>
+<body>
+<div class="container">
+    <div class="leftSide">
+        <!-- Header -->
+        <div class="header">
+            <div class="userimg">
+                <a href="/index">  <img th:src="@{'data:image/jpeg;base64,'+${currentUser.get().generateBase64Image()}}" onerror="this.src='img/default.png';" class="cover"> </a>
+            </div>
+            <ul class="nav_icons">
+                <li><ion-icon name="scan-circle-outline"></ion-icon></li>
+                <li><ion-icon name="chatbox"></ion-icon></li>
+                <li><ion-icon name="ellipsis-vertical"></ion-icon></li>
+            </ul>
+        </div>
+        <!-- Search Chat -->
+        <div class="search_chat">
+            <div>
+                <input type="text" placeholder="Search or start new chat">
+                <ion-icon name="search-outline"></ion-icon>
+            </div>
+        </div>
+        <!-- CHAT LIST -->
+        <div class="chatlist">
+            <a th:each="friend:${friends}" th:href="@{'/messages/' + ${friend.getSecondUser().getId()}}" class="block active">
+                <div class="imgBox">
+                    <img th:src="@{'data:image/jpeg;base64,'+${friend.getSecondUser().generateBase64Image()}}"  onerror="src='/img/default.png';" class="cover">
+                </div>
+                <div class="details">
+                    <div class="listHead">
+                        <h4 th:text="${friend.getSecondUser().getFirstname()} +' ' + ${friend.getSecondUser().getLastname()} ">Jhon Doe</h4>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="rightSide">
+        <div class="header">
+            <div class="imgText">
+                <div class="userimg">
+                    <img th:src="@{'data:image/jpeg;base64,'+${currentFriend.getSecondUser().generateBase64Image()}}"  onerror="src='/img/default.png';" class="cover">
+                </div>
+                <h4 th:text="${currentFriend.getSecondUser().getFirstname()} +' ' + ${currentFriend.getSecondUser().getLastname()} ">Qazi <br></h4>
+            </div>
+            <ul class="nav_icons">
+                <li><ion-icon name="search-outline"></ion-icon></li>
+                <li><ion-icon name="ellipsis-vertical"></ion-icon></li>
+            </ul>
+        </div>
+
+        <!-- CHAT-BOX -->
+        <div class="chatbox" >
+            <div th:each="message :${messages}"  th:class="${message.getSender().getId()==currentUser.get().getId()}? 'message my_msg' : 'message friend_msg'  ">
+                <p>
+                 <span th:text="${message.getContent()}"></span>
+                    <br><span th:text="${message.formattedCreatedDate}" class="Date"></span>
+                </p>
+            </div>
+        </div>
+
+        <!-- CHAT INPUT -->
+        <div class="chat_input">
+            <form action="/sendMessage" method="post">
+                <input type="hidden" placeholder="Напишите сообщение" name="idRecipient" th:value="${currentFriend.getSecondUser().id}">
+                <input type="text" name="messageText" placeholder="Напишите сообщение" class="input_field" required>
+                <button type="submit">
+                    <ion-icon name="send"></ion-icon>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

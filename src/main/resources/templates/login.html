@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <title>Please Log In</title>
+    <title>Sign in</title>
+    <link rel="stylesheet" href="/css/reg.css"/>
 </head>
 <body>
-<h1>Please Log In</h1>
-<div th:if="${param.error}">
-    Invalid username and password.</div>
-<div th:if="${param.logout}">
-    You have been logged out.</div>
+<div  class="wrapper">
+    <h1>Вход</h1>
 <form action="/procces_login" method="post">
-    <div>
-        <input type="text" name="username" id="username"/>
+        <input type="text" name="username" id="username" placeholder="username"/>
+        <input type="password" name="password" id="password" placeholder="password"/>
+    <button type="submit">Войти</button>
+    <div class="member">
+        Нет аккаунта? <a href="/registration">Зарегистрируйтесь здесь</a>
     </div>
-    <div>
-        <input type="password" name="password" id="password"/>
-    </div>
-    <input type="submit" value="Log in" />
-    <a href="/registration">Register</a>
+
 </form>
+</div>
 </body>
 </html>

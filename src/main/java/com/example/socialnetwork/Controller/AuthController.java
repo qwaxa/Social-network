@@ -29,7 +29,7 @@ public class AuthController {
 
     @GetMapping("/registration")
     public String registration(Model model){
-        model.addAttribute("user_reg", new User());
+        model.addAttribute("user", new User());
         return "registration";
     }
     @PostMapping("/registration")
@@ -38,6 +38,7 @@ public class AuthController {
         userValidator.validate(user,bindingResult);
         if(bindingResult.hasErrors())
             return "registration";
+
         registationService.register(user);
         return "redirect:/auth/login";
     }

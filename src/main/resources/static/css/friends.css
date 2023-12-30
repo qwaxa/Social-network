@@ -1,0 +1,98 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(
+            #0077cc 50px,
+            #dfe9f5 50px,
+            #dfe9f5 100%
+    );
+}
+
+.container {
+    position: relative;
+    width: 600px; /* You can adjust the width as needed */
+    height: calc(100vh - 40px);
+    background: #fff;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.06), 0 2px 5px 0 rgba(0, 0, 0, 0.06);
+    display: flex;
+}
+
+.friends-list {
+    width: 100%;
+    overflow-y: auto;
+}
+
+.friend-block {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    border-radius: 8px; /* Закругление углов */
+    margin-bottom: 10px; /* Добавьте отступ снизу между блоками друзей */
+    background-color: #f8f8f8;
+
+    transition: background-color 0.3s ease; /* Плавное изменение цвета фона при наведении */
+}
+.friend-block:hover {
+    background-color: #e0e0e0; /* Изменение цвета фона при наведении курсора */
+}
+
+
+.imgBox {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-top: 5px; /* Добавьте отступ сверху для выравнивания с текстом */
+}
+
+.cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* Стиль заголовка "Друзья" */
+.friends-heading {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.details_pending {
+    display: flex;
+    align-items: center;
+}
+
+.accept-button,
+.reject-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-left: 100px;
+    cursor: pointer;
+}
+
+.reject-button {
+    background-color: #f44336;
+}
+.imgBox img{
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+}

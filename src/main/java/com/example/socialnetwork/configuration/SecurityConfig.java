@@ -22,7 +22,6 @@ public class SecurityConfig  {
     @Autowired
     private CustomUserDetailsService CustomUserDetailsService;
 
-
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -44,17 +43,21 @@ public class SecurityConfig  {
         http.csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authorizeHttpRequests(auth ->
+
                         auth.requestMatchers("/registration").permitAll()
                                 .requestMatchers("/auth/login").permitAll()
+                                .requestMatchers("/registration.html").permitAll()
+                                .requestMatchers("/css/**").permitAll()
+                                .requestMatchers("/img/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                 .loginPage("/auth/login")
                         .loginProcessingUrl("/procces_login")
-                        .defaultSuccessUrl("/ShowUserInfo",true)
+                        .defaultSuccessUrl("/index",true)
                         .failureUrl("/failure")
-
-        ).logout(logout ->
+                        .permitAll()
+                          ).logout(logout ->
                         logout.permitAll()
                                 .logoutUrl("/logout")
                                 .logoutSuccessUrl("/auth/login"));

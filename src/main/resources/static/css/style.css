@@ -1,0 +1,597 @@
+*{
+    margin:0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+body{
+    background: #dfe9f5;
+
+}
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #1876f2;
+    padding: 5px 5%;
+    position: sticky;
+    top:0;
+    z-index: 100;
+}
+.logo{
+    font-size: 32px;
+    color: white;
+    text-decoration: None;
+    font-weight: 700;
+}
+.nav-left,.nav-right{
+    display: flex;
+    align-items: center;
+}
+.nav-left ul li{
+    list-style: none;
+    display: inline-block;
+
+}
+.nav-left ul li img{
+    width: 28px;
+    margin: 0 15px;
+}
+
+.nav-user-icon img{
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.nav-user-icon{
+    margin-left: 30px;
+}
+.online{
+    position: relative;
+}
+.online::after{
+    content:'';
+    width: 7px;
+    height: 7px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background: #41db51;
+    position:absolute;
+    top: 0;
+    right: 0;
+
+}
+.container{
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 5%;
+}
+.left-sidebar{
+    /*background: #cbdffa;*/
+    flex-basis: 25%;
+    position: sticky;
+    top:70px;
+    align-self: flex-start;
+
+}
+.right-sidebar{
+    /*background: #cbdffa;*/
+    flex-basis: 25%;
+    position: sticky;
+    top:70px;
+    align-self: flex-start;
+    background: #fff;
+
+
+}
+.main-content{
+    flex-basis: 47%;
+}
+.imp-links a{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    color: #626262;
+    width: fit-content;
+}
+.imp-links a img{
+    width: 25px;
+    margin-right: 15px;
+
+}
+.imp-links a:last-child{
+    color:#1876f2;
+}
+.imp-links{
+    border-bottom: 1px solid #ccc;
+
+}
+.write-post-container {
+    width: 100%;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+/* Стилизация input[type="file"] */
+.post-input-container input[type="file"] {
+    display: none; /* Скрываем оригинальный элемент input[type="file"] */
+}
+
+.file-upload-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.file-upload-label {
+    background-color: #1876f2;
+    color: #fff;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px; /* Добавлено для отступа между кнопками */
+}
+
+/* Стилизация кнопки */
+.post-input-container input[type="submit"] {
+    background-color: #1876f2;
+    color: #fff;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+/* Стилизация input[type="file"] */
+.post-input-container input[type="file"] {
+    display: none; /* Скрываем оригинальный элемент input[type="file"] */
+}
+.post-input-container textarea {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+.post-input-container input[type="submit"]:hover {
+    background-color: #145d9e;
+}
+.user-profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.user-profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+.user-profile div {
+    display: flex;
+    flex-direction: column;
+}
+.user-profile p {
+    margin: 0;
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+}
+.post-input-container {
+    display: flex;
+    flex-direction: column;
+}
+.user-profile small{
+    font-size: 12px;
+
+}
+
+
+.add-post-links{
+    display: flex;
+    margin-top: 10px;
+}
+.add-post-links a{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    color:#626262 ;
+    margin-right: 30px;
+    font-size: 13px;
+}
+.add-post-links a img{
+    width:  20px;
+    margin-right: 10px;
+
+}
+.post-container{
+    width: 100%;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: #626262;
+    margin: 20px 0;
+
+}
+.user-profile span{
+    font-size:  13px;
+    color: #9a9a9a;
+}
+.post-text{
+    color: #626262;
+    margin: 15px 0 ;
+    font-size: 15px;
+
+}
+.post-img{
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 5px;
+
+}
+.post-row{
+    display: flex;
+    align-items:center ;;
+    justify-content: space-between;
+}
+.activity-icons div img{
+    width: 18px;
+    margin-right: 10px;
+}
+.activity-icons div{
+    display: inline-flex;
+    align-items: center;
+    margin-right: 110px;
+}
+/*profile page----------------------------------------------*/
+.profile-container{
+    padding: 20px 15%;
+    color: #626262;
+
+}
+.profile-details{
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 4px;
+    margin-right:-40px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+}
+.pd-row{
+    display: flex;
+    align-items: flex-start;
+}
+.pd-image{
+    width: 100px;
+    margin-right: 20px;
+    border-radius: 6px;
+}
+.pd-row div h3{
+    font-size: 25px;
+    font-weight: 600;
+
+}
+.pd-row div p{
+    font-size: 14px;
+
+}
+.pd-row div img{
+    width: 25px;
+    border-radius: 50%;
+}
+.pd-right button{
+    background: #1876f2;
+    border: 0;
+    outline: 0;
+    padding: 6px 10px;
+    display: inline-flex;
+    align-items: center;
+    color: #ffffff;
+    border-radius: 3px;
+    margin-left: 10px;
+    cursor: pointer;
+
+}
+.pd-right button img{
+    height: 15px;
+    margin-right: 10px;
+
+}
+.pd-right button:first-child{
+    background:  #e4e6eb;
+    color: #000;
+}
+.profile-info{
+    display:  flex;
+    align-items: flex-start;
+    justify-content:space-between ;
+    margin-top: 20px;
+
+}
+.info-col{
+    flex-basis:  33%;
+}
+.post-col{
+    flex-basis: 65%;
+
+}
+.profile-intro{
+    background:#ffffff;
+    padding:20px ;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+.profile-intro h3{
+    font-weight: 600;
+}
+.intro-text{
+    text-align: center;
+    margin:10px 0;
+    font-size: 15px;
+
+}
+.profile-intro hr{
+    border: 0;
+    height: 1px;
+    background: #cccc;
+    margin: 24px 0;
+}
+.title-box{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.title-box a{
+    text-decoration: none;
+    color: #1876f2;
+    font-size: 14px;
+}
+.friends-box{
+    display: grid;
+    grid-template-columns: repeat(3,auto);
+    grid-gap:10px;
+    margin-top: 15px;
+}
+
+.friends-box div img{
+    width: 40px;
+    height:40px;
+    border-radius:50%;
+    cursor:pointer;
+}
+.friend-box div{
+    position: relative;
+
+}
+.friend-box p{
+    position: absolute;
+    bottom: 0;
+    left:0;
+
+}
+.profile-intro  textarea{
+    width: 100%;
+    border: 0;
+    outline: 0;
+    border-bottom: 1px solid #cccccc;
+    background: transparent;
+    resize: none;
+}
+.like-input:checked + .like-image {
+    filter: grayscale(0%); /* Изменение изображения при выборе (в данном случае, снимаем черно-белый эффект) */
+    transform: scale(1.2); /* Пример изменения размера изображения при выборе */
+    transition: filter 0.3s, transform 0.3s; /* Добавляем плавный переход */
+}
+
+
+.like-input {
+    display: none; /* Скрываем настоящий input */
+}
+comments-container {
+    margin-top: 20px;
+}
+
+.comments-container h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.comments-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.comments-container li {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px; /* Закругление углов */
+    background-color: #f8f8f8;
+
+}
+
+
+.comments-container li span {
+    margin-right: 10px;
+    font-size: 14px;
+    color: #777;
+}
+
+.comments-container form {
+    margin-top: 20px;
+}
+
+.comments-container form textarea {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+.comments-container form button {
+    background-color: #1876f2;
+    color: #fff;
+    border: none;
+    padding: 7px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.comments-container form button:hover {
+    background-color: #145c9e;
+}
+.like-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+.like-image {
+    width: 24px;
+}
+
+.like-count {
+    margin-top:4px;
+    font-size: 16px;
+    color: #555; 
+}
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+/* Общий стиль для кнопки */
+.like-button {
+    background-color: #fff; /* Цвет фона */
+    border: none;
+    cursor: pointer;
+}
+
+/* Стиль для кнопки при наведении курсора */
+.like-button:hover {
+    background-color: #f0f0f0; /* Изменение цвета фона при наведении */
+}
+
+/* Стиль для лайкнутой кнопки */
+.liked img  {
+    background-color: #ff4d4d; /* Например, красный цвет для лайкнутой кнопки */
+    color: #fff; /* Цвет текста */
+}
+
+/* Остальные стили (можете добавить по своему усмотрению) */
+.like-image {
+    width: 23px;
+    margin-right: 5px;
+}
+
+.like-count {
+    margin-left: 5px;
+}
+/* Стили для формы удаления поста и кнопки */
+.delete-post-form {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.delete-post-button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    margin-left: 350px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete-post-button:hover {
+    background-color: #c82333;
+}
+.intro-text {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn-save {
+    background-color: #1876f2;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-save:hover {
+    background-color: #145c9e;}
+
+.upload-form {
+    margin-top:10%;
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+}
+
+.file-input {
+    display: none;
+}
+
+.btn-upload {
+    background-color: #1876f2;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-upload:hover {
+    background-color: #145c9e;
+}
+.logout-button {
+    color: #fff; /* Цвет текста */
+    background-color: #3498db; /* Цвет фона */
+    padding: 8px 16px; /* Внутренние отступы */
+    text-decoration: none; /* Убираем подчеркивание */
+    border-radius: 4px; /* Закругляем углы */
+}
+.logout-button:hover {
+    background-color: #145c9e;
+}

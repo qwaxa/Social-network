@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/friends.css">
+    <title>Social network</title>
+</head>
+<body>
+<div class="container">
+
+    <div class="friends-list" >
+        <h2 class="friends-heading">Друзья</h2>
+        <!-- FRIEND LIST -->
+        <div class="friend-block" th:each ="friend:${friends}">
+            <div class="imgBox">
+                <img th:src="@{'data:image/jpeg;base64,'+${friend.getSecondUser().generateBase64Image()}}"  onerror="this.src='/img/default.png';">
+            </div>
+            <div class="details">
+                <h4 th:text="${friend.getSecondUser().getFirstname()} +' ' + ${friend.getSecondUser().getLastname()} ">Jhon Doe</h4>
+            </div>
+        </div>
+        <h2 class="friends-heading">Заявки в друзья</h2>
+        <div class="friend-block" th:each ="friend:${pendingFriends}">
+            <div class="imgBox">
+                <img th:src="@{'data:image/jpeg;base64,'+${friend.getFirstUser().generateBase64Image()}}" onerror="this.src='img/default.png';">
+            </div>
+            <div class="details_pending">
+                <h4 th:text="${friend.getFirstUser().getFirstname()} + ' ' + ${friend.getFirstUser().getLastname()}">Jhon Doe</h4>
+                <form th:action="@{/acceptFriend}" method="post" th:object="${friend.getFirstUser().getId()}">
+                    <input type="hidden" th:name="friendId" th:value="${friend.getFirstUser().getId()}"  >
+                    <button type="submit" class="accept-button">Принять</button>
+                </form>
+                <form th:action="@{/rejectFriend}" method="post">
+                    <input type="hidden" th:name="friendId" th:value="${friend.getFirstUser().getId()}">
+                    <button type="submit" class="reject-button">Отклонить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

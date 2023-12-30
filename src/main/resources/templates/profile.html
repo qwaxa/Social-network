@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile page</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<nav>
+    <div class="nav-left">
+        <a href="/index" class="logo">Social network</a>
+    </div>
+    <div class="nav-right">
+        <div class="nav-user-icon online">
+            <a href="/index">  <img th:src="@{'data:image/jpeg;base64,'+${currentUser.get().generateBase64Image()}}" onerror="this.src='img/default.png';"> </a>
+        </div>
+        <div class="nav-user-icon">
+            <a href="/logout" class="logout-button">Выйти</a>
+        </div>
+    </div>
+</nav>
+<!--profile page-->
+<div class="profile-container">
+
+    <div class="profile-details">
+        <div class="pd-left">
+            <div class="pd-row">
+                <img th:src="@{'data:image/jpeg;base64,'+${userProfile.get().generateBase64Image()}}" onerror="src='/img/default.png';" class="pd-image">
+                <div>
+                    <h3 th:text="${userProfile.get().getFirstname()} +' ' + ${userProfile.get().getLastname()} " ></h3>
+
+                </div>
+            </div>
+            <form  th:if="${userProfile.get().id == currentUser.get().getId()}"  th:action="@{/profile/upload}" method="post" enctype="multipart/form-data" class="upload-form">
+                <label for="fileInput" class="custom-file-upload">
+                    <i class="fa fa-cloud-upload"></i> Выбрать файл
+                </label>
+                <input id="fileInput" type="file" name="file" accept="image/*" class="file-input">
+                <br>
+                <input type="submit" value="Загрузить" class="btn-upload">
+            </form>
+        </div>
+        <div class="pd-right">
+            <button type="button"><img src="/img/friend.png"> Друзья</button>
+            <button  type="button"> <img src="/img/message.png" >Message</button>
+
+
+            <!-- Добавленный блок для кнопки "Добавить в друзья" -->
+            <div th:if="${currentUser.get().id != userProfile.get().id}">
+                <form th:action="@{/profile/addOrRemoveFriend}" method="post">
+                    <input type="hidden" name="userId" th:value="${userProfile.get().id}">
+                    <!-- Если пользователь уже другом, то выводим кнопку "Удалить из друзей" -->
+                    <button th:if="${areFriends} " type="submit">Удалить из друзей</button>
+                    <!-- Если пользователь не в друзьях, то выводим кнопку "Добавить в друзья" -->
+                    <button th:unless="${areFriends}" type="submit">Добавить в друзья</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="profile-info">
+        <div class="info-col">
+            <div class="profile-intro">
+                <h3>О себе</h3>
+                <form th:action="@{/updateIntro}" method="post" class="intro-form">
+                    <textarea name="introText" class="intro-text" rows="3" cols="50" th:text="${userProfile.get().getBio()}" placeholder="Расскажите о себе..."></textarea>
+                    <br>
+                    <!-- Добавляем проверку на соответствие айди текущего пользователя и айди профиля -->
+                        <div th:if="${userProfile.get().id == currentUser.get().getId()}">
+                            <input type="submit" value="Сохранить" class="btn-save">
+                        </div>
+                </form>
+            </div>
+
+            <div class="profile-intro">
+                <div class="title-box">
+                    <h3>Friends</h3>
+                    <a href="">All Friends</a>
+                </div>
+                <p th:text="${friends.size()}"></p>
+                <div class="friends-box">
+                    <div th:each="friend:${friends}" class="friend_div">
+                        <a th:href="@{/profile/{id}(id=${friend.getSecondUser().getId()})}">
+                            <div class="friend-item">
+                                <img th:src="@{'data:image/jpeg;base64,' + ${friend.getSecondUser().generateBase64Image()}}" onerror="src='/img/default.png';">
+                            </div>
+                        </a>
+                        <p th:text="${friend.getSecondUser().getFirstname()}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="post-col">
+            <div class="write-post-container" th:if="${userProfile.get().id == currentUser.get().getId()}"  >
+                <div class="user-profile">
+                    <img th:src="@{'data:image/jpeg;base64,'+${userProfile.get().generateBase64Image()}}">
+                    <div>
+                        <p th:text="${userProfile.get().getFirstname()} +' ' + ${userProfile.get().getLastname()} "> 52</p>
+
+                    </div>
+                </div>
+                <div class="post-input-container" >
+                    <form th:action="@{/createPost}" method="post" enctype="multipart/form-data">
+                        <textarea rows="3"  name="content" id="" placeholder="Поделитесь впечатлениями"></textarea>
+                        <div class="file-upload-container">
+                            <label class="file-upload-label" for="file">Выберите файл</label>
+                            <input type="file" id="file" name="postImage" accept="image/*">
+                        </div>
+                        <input type="submit" value="Загрузить">
+                    </form>
+                </div>
+                <!-- Проверка наличия постов и отображение сообщения, если их нет -->
+
+            </div>
+            <div  class="post-container"  th:each="post : ${posts}" >
+                <div class="user-profile">
+                    <img th:src="@{'data:image/jpeg;base64,'+${userProfile.get().generateBase64Image()}}" >
+                    <div>
+                        <p th:text="${post.getUser().getFirstname()} +' ' + ${post.getUser().getLastname()}" > 52</p>
+                        <span th:text="${post.formattedCreatedDate}"></span>
+                    </div>
+                </div>
+                <p class="post-text" th:text="${post.getContent()}">
+                  SPB %%@%@@%@%
+                </p>
+                <img th:src="@{'data:image/jpeg;base64,'+${post.generateBase64Image()}} " class="post-img">
+                <div class="post-row">
+                    <div class="activity-icons">
+                        <div>
+                            <form th:method="post" th:action="@{'/likePost'}" class="like-form">
+                                <input type="hidden" name="postId" th:value="${post.getId()}">
+                                <button type="submit" class="like-button">
+                                    <img src="/img/heart.png" alt="Like" class="like-image">
+                                    <!-- Отображение количества лайков рядом с изображением -->
+                                    <span class="like-count" th:text="${post.getLike()}"></span>
+                                </button>
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                    <div class="post-profile-icon"></div>
+                </div>
+                <div class="comments-container">
+                    <h4>Comments</h4>
+                    <ul>
+                        <li th:each="comment : ${post.comments}">
+                            <div class="user-avatar">
+                                <a th:href="@{/profile/{id}(id=${comment.getUser_comment().getId()})}"><img th:src="@{'data:image/jpeg;base64,' + ${comment.getUser_comment().generateBase64Image()}}" alt="User Avatar"> </a>
+                            </div>
+                            <span th:text="${comment.getMessage()}"></span>
+                            <span th:text="${comment.getFormattedCreatedDate()}"></span>
+                        </li>
+                    </ul>
+                    <form th:action="@{/addComment}" method="post">
+                        <input type="hidden" name="postId" th:value="${post.id}">
+                        <textarea name="content" placeholder="Add a comment"></textarea>
+                        <button type="submit">Add Comment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+</body>
+</html>
